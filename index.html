@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuzzle — a Chuzzle-inspired sliding match game</title>
+<meta name="description" content="Fuzzle: slide whole rows and columns (they wrap around) to match 3+ fuzzy blobs of the same colour. No build step, no server — just open it on GitHub Pages.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>🫧 Fuzzle</h1>
+    <p class="tag">Slide a whole row or column. It wraps around. Match 3+ fuzzy friends.</p>
+    <p class="disclaimer">Fan-made tribute inspired by the mechanics of <i>Chuzzle</i> (Raptisoft / PopCap). Not affiliated with PopCap or EA. All art and code here are original.</p>
+  </header>
+
+  <section class="hud" aria-label="Score">
+    <div class="stat"><span>Score</span><strong id="score">0</strong></div>
+    <div class="stat"><span>Best</span><strong id="best">0</strong></div>
+    <div class="stat"><span>Level</span><strong id="level">1</strong></div>
+    <div class="stat"><span>Scrambles</span><strong id="scrambles">3</strong></div>
+    <div class="stat meter-stat">
+      <span>Level meter</span>
+      <div class="meter" role="progressbar" aria-label="Level progress"><div id="meterFill"></div></div>
+      <small id="meterText">0 / 40 popped</small>
+    </div>
+  </section>
+
+  <p id="message" class="message" role="status">Drag a row left/right or a column up/down to make a match!</p>
+
+  <section class="board-area">
+    <div id="board" class="board" aria-label="6 by 6 Fuzzle board"></div>
+    <div class="side-controls">
+      <div class="panel">
+        <h2>Selected fuzzy</h2>
+        <p id="selectedText">Tap a fuzzy to select it, then use the arrows.</p>
+        <div class="dpad" aria-label="Slide selected row or column">
+          <button id="btnUp" type="button" title="Slide its column up">▲</button>
+          <button id="btnLeft" type="button" title="Slide its row left">◀</button>
+          <button id="btnRight" type="button" title="Slide its row right">▶</button>
+          <button id="btnDown" type="button" title="Slide its column down">▼</button>
+        </div>
+        <p class="hint-text">Tip: dragging is faster. The arrows are here for precise moves and keyboards.</p>
+      </div>
+      <div class="panel buttons">
+        <button id="btnHint" type="button">💡 Hint</button>
+        <button id="btnScramble" type="button">🔀 Scramble</button>
+        <button id="btnSound" type="button" aria-pressed="true">🔊 Sound on</button>
+        <button id="btnNew" type="button">↻ New game</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="howto">
+    <h2>How to play</h2>
+    <ul>
+      <li><b>Drag</b> any fuzzy horizontally to slide its whole row, or vertically to slide its whole column. Rows and columns <b>wrap around</b> — a fuzzy pushed off the left reappears on the right, top reappears at the bottom.</li>
+      <li>Form a connected group of <b>3 or more</b> of the same colour (lines, L-shapes, and 2×2 blocks all count). They pop, the ones above fall down, and new fuzzies drop in from the top — cascades score extra.</li>
+      <li>A move that makes no match <b>slides back</b>. Locked fuzzies (🔒, from level 2) freeze their row and column until you pop them — popping one is worth bonus points.</li>
+      <li>Fill the level meter to level up and earn a bonus. If no move exists, use a <b>Scramble</b>. Run out of scrambles with no moves left and it's game over.</li>
+      <li>Keyboard: click a fuzzy to select it, then arrow keys slide its row/column by one.</li>
+    </ul>
+    <h2>What this is (and isn't)</h2>
+    <p>This is a clean-room, mechanics-only tribute: the sliding-wrap board, connected-group matches, gravity, and level meter are the same <i>kind</i> of puzzle as Chuzzle, but every fuzzy, sound, and line of code here was made for this repo. No PopCap art, audio, or names are used. Fat and Super fuzzies from the original are not in v1 — see the README roadmap.</p>
+  </section>
+
+  <footer>
+    <p>Static only: no build, no backend, no tracking. Works offline once loaded. Best score is saved in your browser only.</p>
+  </footer>
+</main>
+<script src="game.js"></script>
+</body>
+</html>
