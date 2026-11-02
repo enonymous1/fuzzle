@@ -23,12 +23,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Smoke-check static files
+      - name: Check and test
         run: |
           test -f index.html
           test -f style.css
           test -f game.js
           node --check game.js
+          # Explicit file list: `node --test tests/` mis-resolves the
+          # directory as a module on the pinned Node version.
+          node --test tests/logic.test.js tests/board-smoke.test.js
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
